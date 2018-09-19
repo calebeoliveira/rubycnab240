@@ -111,7 +111,8 @@ class RubyCnab240::Arquivo
 
   def save_to_file(file)
     string = self.to_string
+    encoded = string.encode(universal_newline: true).encode(crlf_newline: true)
 
-    File.open(file, 'w') { |file| file.write(string) }
+    File.open(file, 'w') { |file| file.write(encoded) }
   end
 end
