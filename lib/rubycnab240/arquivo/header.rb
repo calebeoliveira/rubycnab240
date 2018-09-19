@@ -30,10 +30,7 @@ class RubyCnab240::Arquivo::Header < RubyCnab240::Arquivo
 
     #bb
     #Preencher com “0009999990126       “, onde 999999 informar o número do convênio de pagamento, alinhado à direita com zeros à esquerda seguido de “0126” para pagamento e demais posições com brancos (espaços).
-    @codigo_do_convenio_do_banco = fields[:codigo_do_convenio_do_banco].to_s[0..8].rjust(9, '0') #Informar o convênio de pagamento, completando com zeros à esquerda;
-    @bb2 = fields[:bb2] = '0126'
-    @bb3 = fields[:bb3] = '     '
-    @bb4 = fields[:bb4] = '  '
+    @codigo_do_convenio_do_banco = fields[:codigo_do_convenio_do_banco].to_s[0..8].ljust(20, ' ') #Informar o convênio de pagamento, completando com zeros à esquerda;
 
     @agencia_mantenedora_da_conta = fields[:agencia_mantenedora_da_conta].to_s[0..4].rjust(5, '0')
     @digito_verificador_da_agencia = fields[:digito_verificador_da_agencia].to_s[0..0].upcase.rjust(1, '0')
@@ -48,7 +45,7 @@ class RubyCnab240::Arquivo::Header < RubyCnab240::Arquivo
     @data_de_geracao_do_arquivo = Date.today.strftime("%d%m%Y")
     @hora_de_geracao_do_arquivo = Time.now.strftime("%H%M%S")
     @numero_sequencial_de_arquivo = fields[:numero_sequencial_de_arquivo].to_s[0..5].upcase.rjust(6, '0')
-    @versao_do_leiaute_de_arquivo = '050'
+    @versao_do_leiaute_de_arquivo = '089'
     @densidade_de_gravacao_de_arquivo = '0' * 5
     @para_uso_reservado_do_banco = '                    '
     @para_uso_reservado_da_empresa = fields[:para_uso_reservado_da_empresa].to_s[0..19].rjust(20, ' ') #uso reservado da empresa
@@ -65,9 +62,6 @@ class RubyCnab240::Arquivo::Header < RubyCnab240::Arquivo
     header << @tipo_de_inscricao_da_empresa
     header << @numero_de_inscricao_da_empresa
     header << @codigo_do_convenio_do_banco
-    header << @bb2
-    header << @bb3
-    header << @bb4
     header << @agencia_mantenedora_da_conta
     header << @digito_verificador_da_agencia
     header << @numero_da_conta_corrente

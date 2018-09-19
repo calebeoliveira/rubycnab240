@@ -31,17 +31,14 @@ class RubyCnab240::Arquivo::Lote::Header < RubyCnab240::Arquivo::Lote
     @tipo_de_registro = fields[:tipo_de_registro] = '1'
     @tipo_de_operacao = fields[:tipo_de_operacao] = 'C'
     @tipo_de_servico = fields[:tipo_de_servico] = '20' #Os tipos de serviços aceitos pelo BB são somente '20' (Pagamento a Fornecedores), '30' (Pagamento de Salários) e '98' (Pagamentos Diversos).
-    @forma_de_lancamento = fields[:forma_de_lancamento] || '41'  #Formas de lançamentos aceitos pelo BB quando utilizados os segmentos A e B : 01 para Crédito em Conta Corrente, 02 para Pagamento Contra0Recibo, 03 para DOC/TED, 04 para Cartão Salário, 05 para Crédito em Conta Poupança, 10 para Ordem de Pagamento, 41 para TED Outra Titularidade, e 43 para TED Mesma Titularidade. Obs.: no caso da forma de lançamento 03, 41 ou 43, há complementação de informação do campo “Código da Câmara de Compensação”, posições 18 a 20 do segmento A.
-    @numero_da_versao_do_leiaute_do_lote = '031' #Campo não criticado pelo sistema. Informar Zeros OU se preferir, informar número da versão do leiaute do Lote que foi utilizado como base para formatação dos campos. Versões disponíveis: 043, 042, 041, 040, 031, 030 ou 020. A versão do Lote quando informada deve estar condizente com a versão do Arquivo (posições 164 a 166 do Header de Arquivo). Ou seja, para utilizar 043 no lote o Header do arquivo deve conter 084, para 042 no lote o Header do arquivo deve conter 083 ou 082, para 041 ou 040 no lote o Header do arquivo deve conter 080, para 031 no lote o Header do arquivo deve conter 050, para 030 no lote o Header do Arquivo deve conter 040, e para 020 no lote o Header do Arquivo deve conter 030.
+    @forma_de_lancamento = fields[:forma_de_lancamento] || '01'  #Formas de lançamentos aceitos pelo BB quando utilizados os segmentos A e B : 01 para Crédito em Conta Corrente, 02 para Pagamento Contra0Recibo, 03 para DOC/TED, 04 para Cartão Salário, 05 para Crédito em Conta Poupança, 10 para Ordem de Pagamento, 41 para TED Outra Titularidade, e 43 para TED Mesma Titularidade. Obs.: no caso da forma de lançamento 03, 41 ou 43, há complementação de informação do campo “Código da Câmara de Compensação”, posições 18 a 20 do segmento A.
+    @numero_da_versao_do_leiaute_do_lote = '045' #Campo não criticado pelo sistema. Informar Zeros OU se preferir, informar número da versão do leiaute do Lote que foi utilizado como base para formatação dos campos. Versões disponíveis: 043, 042, 041, 040, 031, 030 ou 020. A versão do Lote quando informada deve estar condizente com a versão do Arquivo (posições 164 a 166 do Header de Arquivo). Ou seja, para utilizar 043 no lote o Header do arquivo deve conter 084, para 042 no lote o Header do arquivo deve conter 083 ou 082, para 041 ou 040 no lote o Header do arquivo deve conter 080, para 031 no lote o Header do arquivo deve conter 050, para 030 no lote o Header do Arquivo deve conter 040, e para 020 no lote o Header do Arquivo deve conter 030.
     @uso_exclusivo_febraban = ' '
     @tipo_de_inscricao_da_empresa = fields[:tipo_de_inscricao_da_empresa].to_s[0..0].rjust(1, '0') #1 – para CPF e 2 – para CNPJ.
     @numero_de_inscricao_da_empresa = fields[:numero_de_inscricao_da_empresa].to_s[0..13].rjust(14, '0') #Informar número da inscrição (CPF ou CNPJ) da Empresa, alinhado à direita com zeros à esquerda.
 
     #Codigo do Convenio do Banco
-    @codigo_do_convenio_do_banco = fields[:codigo_do_convenio_do_banco].to_s[0..8].rjust(9, '0') #Informar o convênio de pagamento, completando com zeros à esquerda
-    @bb2 = fields[:bb2] = '0126'
-    @bb3 = fields[:bb3] = '     '
-    @bb4 = fields[:bb4] = '  '
+    @codigo_do_convenio_do_banco = fields[:codigo_do_convenio_do_banco].to_s[0..8].ljust(20, ' ') #Informar o convênio de pagamento, completando com zeros à esquerda;
 
     @agencia_mantenedora_da_conta = fields[:agencia_mantenedora_da_conta].to_s[0..4].rjust(5, '0')
     @digito_verificador_da_agencia = fields[:digito_verificador_da_agencia].to_s[0..0].upcase.rjust(1, '0')
@@ -70,9 +67,6 @@ class RubyCnab240::Arquivo::Lote::Header < RubyCnab240::Arquivo::Lote
     header << self.tipo_de_inscricao_da_empresa
     header << self.numero_de_inscricao_da_empresa
     header << self.codigo_do_convenio_do_banco
-    header << self.bb2
-    header << self.bb3
-    header << self.bb4
     header << self.agencia_mantenedora_da_conta
     header << self.digito_verificador_da_agencia
     header << self.numero_da_conta_corrente
