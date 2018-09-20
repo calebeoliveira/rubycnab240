@@ -75,6 +75,7 @@ class RubyCnab240::Arquivo::Lote < RubyCnab240::Arquivo
                                                         :digito_verificador_da_conta => s[:digito_verificador_da_conta],
                                                         :digito_verificador_da_agencia_e_conta => s[:digito_verificador_da_agencia_e_conta],
                                                         :nome_do_favorecido => s[:nome_do_favorecido],
+                                                        :verificacao_retorno => s[:verificacao_retorno],
                                                         :numero_doc_atribuido_para_empresa => s[:numero_doc_atribuido_para_empresa],
                                                         :data_do_pagamento => @@data_dos_pagamentos,
                                                         :valor_do_pagamento => s[:valor_do_pagamento],

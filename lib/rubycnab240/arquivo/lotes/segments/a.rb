@@ -13,6 +13,7 @@ class RubyCnab240::Arquivo::Lote::Segment::A < RubyCnab240::Arquivo::Lote::Segme
   attr_accessor :digito_verificador_da_conta
   attr_accessor :digito_verificador_da_agencia_e_conta
   attr_accessor :nome_do_favorecido
+  attr_accessor :verificacao_retorno
   attr_accessor :numero_doc_atribuido_para_empresa
   attr_accessor :data_do_pagamento
   attr_accessor :quantidade_da_moeda
@@ -25,7 +26,6 @@ class RubyCnab240::Arquivo::Lote::Segment::A < RubyCnab240::Arquivo::Lote::Segme
 
 
   attr_reader :tipo_de_movimento
-  attr_reader :verificacao_retorno
   attr_reader :tipo_da_moeda
   attr_reader :dec_quantidade_da_moeda
   attr_reader :numero_do_documento_atribuido_pelo_banco
