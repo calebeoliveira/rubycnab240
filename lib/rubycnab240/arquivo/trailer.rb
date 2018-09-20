@@ -19,7 +19,7 @@ class RubyCnab240::Arquivo::Trailer < RubyCnab240::Arquivo
     @uso_exclusivo_febraban = ' ' * 9
     @qtd_registros_de_lote = fields[:qtd_registros_de_lote].to_s[0..5].rjust(6, '0')
     @qtd_registros_do_arquivo = fields[:qtd_registros_do_arquivo].to_s[0..5].rjust(6, '0')
-    @qtd_de_contas_para_conc = ' ' * 6
+    @qtd_de_contas_para_conc = '0' * 6
     @uso_exclusivo_febraban2 = ' ' * 205
   end
 

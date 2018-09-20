@@ -36,7 +36,7 @@ class RubyCnab240::Arquivo::Header < RubyCnab240::Arquivo
     @digito_verificador_da_agencia = fields[:digito_verificador_da_agencia].to_s[0..0].upcase.rjust(1, '0')
     @numero_da_conta_corrente = fields[:numero_da_conta_corrente].to_s[0..11].rjust(12, '0')
     @digito_verificador_da_conta = fields[:digito_verificador_da_conta].to_s[0..0].upcase.rjust(1, '0')
-    @digito_verificador_da_agencia_e_conta = '0'
+    @digito_verificador_da_agencia_e_conta = ' '
 
     @nome_da_empresa = fields[:nome_da_empresa].to_s[0..29].upcase.ljust(30, ' ')
     @nome_do_banco = fields[:nome_do_banco].to_s[0..29].upcase.ljust(30, ' ')
@@ -46,7 +46,7 @@ class RubyCnab240::Arquivo::Header < RubyCnab240::Arquivo
     @hora_de_geracao_do_arquivo = Time.now.strftime("%H%M%S")
     @numero_sequencial_de_arquivo = fields[:numero_sequencial_de_arquivo].to_s[0..5].upcase.rjust(6, '0')
     @versao_do_leiaute_de_arquivo = '089'
-    @densidade_de_gravacao_de_arquivo = '0' * 5
+    @densidade_de_gravacao_de_arquivo = '01600'
     @para_uso_reservado_do_banco = '                    '
     @para_uso_reservado_da_empresa = fields[:para_uso_reservado_da_empresa].to_s[0..19].rjust(20, ' ') #uso reservado da empresa
     @uso_exclusivo_febraban3 = '                             '

@@ -20,8 +20,8 @@ class RubyCnab240::Arquivo::Lote::Trailer < RubyCnab240::Arquivo::Lote
     @uso_exclusivo_febraban = ' ' * 9
     @qtd_registros_de_lote = fields[:qtd_registros_de_lote].to_s[0..5].rjust(6, '0')
     @somatorio_dos_valores = fields[:somatorio_dos_valores].to_s[0..17].rjust(18, '0')
-    @somatorio_qtd_de_moedas = ' ' * 18
-    @numero_de_aviso_debito = ' ' * 6
+    @somatorio_qtd_de_moedas = '0' * 18
+    @numero_de_aviso_debito = '0' * 6
     @uso_exclusivo_febraban2 = ' ' * 165
     @codigo_das_ocorrencias_para_retorno = ' ' * 10
   end

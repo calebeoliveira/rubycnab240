@@ -44,12 +44,12 @@ class RubyCnab240::Arquivo::Lote::Header < RubyCnab240::Arquivo::Lote
     @digito_verificador_da_agencia = fields[:digito_verificador_da_agencia].to_s[0..0].upcase.rjust(1, '0')
     @numero_da_conta_corrente = fields[:numero_da_conta_corrente].to_s[0..11].rjust(12, '0')
     @digito_verificador_da_conta = fields[:digito_verificador_da_conta].to_s[0..0].upcase.rjust(1, '0')
-    @digito_verificador_da_agencia_e_conta = '0'
+    @digito_verificador_da_agencia_e_conta = ' '
     @nome_da_empresa = fields[:nome_da_empresa].to_s[0..29].upcase.rjust(30, ' ')
 
     @mensagem_1 = fields[:mensagem_1] = '                                        '
     @campos_opcionais_de_endereco = fields[:campos_opcionais_de_endereco].to_s[0..79].upcase.ljust(80, ' ')
-    @uso_exclusivo_febraban2 = '        '
+    @uso_exclusivo_febraban2 = '01      '
     @codigo_para_ocorrencias_de_retorno = '          '
   end
 

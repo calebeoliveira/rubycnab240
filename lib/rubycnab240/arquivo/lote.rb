@@ -46,7 +46,8 @@ class RubyCnab240::Arquivo::Lote < RubyCnab240::Arquivo
 
   def <<(s)
     s[:complemento_tipo_de_servico] = '1'
-    s[:codigo_do_banco_na_compensacao] = '001'
+    # s[:codigo_do_banco_na_compensacao] = '001'
+    s[:codigo_do_banco_na_compensacao] = s[:codigo_do_banco_favorecido]
 
      if self.lot_header.forma_de_lancamento == '01'
        #interno
