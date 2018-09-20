@@ -54,7 +54,7 @@ class RubyCnab240::Arquivo::Lote::Segment::A < RubyCnab240::Arquivo::Lote::Segme
     @digito_verificador_da_conta = conta[-1]
     @digito_verificador_da_agencia_e_conta = fields[:digito_verificador_da_agencia_e_conta].to_s[0..0].upcase.rjust(1, ' ') #As contas do Banco do Brasil não possuem o segundo dígito, nesse caso informar 'branco' (espaço). Para favorecidos de outros bancos que possuem contas com dois dígitos verificadores (DV), preencher este campo com o segundo dígito verificador.
     @nome_do_favorecido = fields[:nome_do_favorecido].to_s[0..29].upcase.ljust(30, ' ')
-    @verificacao_retorno = '0' * 11
+    @verificacao_retorno = fields[:verificacao_retorno].to_s[0..10].rjust(11, '0')
     @numero_doc_atribuido_para_empresa = fields[:numero_doc_atribuido_para_empresa].to_s[0..8].upcase.rjust(9, '0') #No caso de pagamento de salário, os número colocados nas posições 74 a 79 aparecerão como número do documento no extrato do favorecido, e os números das posições 80 a 85, serão utilizadas como número do documento no extrato do pagador. Obs.: Como os lançamentos ocorridos na conta do pagador são aglutinados num mesmo lote as posições 80 a 85 de todos os detalhes devem ser iguais, caso contrário será considerado apenas o número constante no primeiro registro detalhe de cada lote. As posições 86 a 93 não são tratadas pelo sistema. As informações impostas nessa posição voltarão iguais no arquivo retorno.
     @data_do_pagamento = fields[:data_do_pagamento].to_s[0..7].rjust(8, ' ')
     @tipo_da_moeda = fields[:tipo_da_moeda] = 'BRL'
@@ -70,7 +70,7 @@ class RubyCnab240::Arquivo::Lote::Segment::A < RubyCnab240::Arquivo::Lote::Segme
     @complemento_finalidade_da_ted = fields[:complemento_finalidade_da_ted].to_s[0..4].ljust(5, ' ')
     @complemento_finalidade_de_pagamento = fields[:complemento_finalidade_de_pagamento].to_s[0..1].ljust(2, ' ')
     @uso_exclusivo_febraban = '   '
-    @aviso_ao_favorecido = ' ' #O ou 5 – o código 5 (com aviso) somente será tratado caso tenha sido negociado com a agência e conste no cadastramento do serviço a emissão de aviso.
+    @aviso_ao_favorecido = '0' #O ou 5 – o código 5 (com aviso) somente será tratado caso tenha sido negociado com a agência e conste no cadastramento do serviço a emissão de aviso.
     @codigo_das_ocorrencias_para_retorno = fields[:codigo_das_ocorrencias_para_retorno] = '          '
   end
 
